@@ -1,29 +1,35 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import {Nav, Logo, Hamburger, Menu, MenuLink} from './NavbarStyle'
+import React, { useState } from "react";
+import { Hamburger, Logo, Menu, MenuLink, Nav } from "./NavbarStyle";
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false)
-
+const Navbar = ({ isAuth, setIsAuth}) => {
+  const [isOpen, setIsOpen] = useState(true);
+  console.log(isOpen);
   return (
-    <Nav className='asdasd'>
-      <Logo>
-        <i>{"Kadiiiirrrrr's"}</i>
+    <Nav>
+      <Logo to="/">
+        <i>{"Kenan's"}</i>
         <span> Recipe</span>
       </Logo>
-      <Hamburger onClick={()=> setIsOpen(!isOpen)}>
-        <span/> 
-        <span/>
-        <span/>
+      <Hamburger onClick={() => setIsOpen(!isOpen)}>
+        <span />
+        <span />
+        <span />
       </Hamburger>
-      <Menu isOpen={isOpen} onClick={()=> setIsOpen(false)} >
-        <MenuLink to="/about" >About</MenuLink>
-        <MenuLink href="https://github.com/KenanTopal" target="_blank" rel="noopener noreferrer">Github</MenuLink>
-        <MenuLink to="/login">Logout</MenuLink>
+      <Menu isOpen={isOpen} onClick={() => setIsOpen(false)}>
+        <MenuLink to="/about">About</MenuLink>
+        <MenuLink
+          as="a"
+          href="https://github.com/orgs/clarusway/dashboard"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Github
+        </MenuLink>
+        { isAuth && <MenuLink to="/login" onClick={ () => setIsAuth(false) }>Logout</MenuLink>}
+       
       </Menu>
     </Nav>
-  )
-}
+  );
+};
 
-export default Navbar
-
+export default Navbar;
